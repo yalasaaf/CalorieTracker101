@@ -10,25 +10,54 @@
     <h1>Calorie Tracker App</h1>
 
     <!-- Navigation -->
-    <nav>
-        <button onclick="showScreen('home')">Home</button>
-        <button onclick="showScreen('log')">Log Food</button>
-        <button onclick="showScreen('foods')">Foods</button>
-        <button onclick="showScreen('history')">History</button>
-        <button onclick="showScreen('settings')">Settings</button>
-    </nav>
+<nav id="main-nav">
+    <button onclick="showScreen('home')">Home</button>
+    <button onclick="showScreen('log')">Log Food</button>
+    <button onclick="showScreen('foods')">Foods</button>
+    <button onclick="showScreen('history')">History</button>
+    <button onclick="showScreen('settings')">Settings</button>
+</nav>
 
     <!-- Screens (pages) -->
     <section id="home-screen" class="screen">
-        <h2>Welcome!</h2>
-        <p>Use the navigation buttons above to track calories, view foods, or check history.</p>
-    </section>
+    <h2>Welcome to Calorie Tracker</h2>
+
+    <p class="subtitle">Select an option below to get started:</p>
+    <div class="dashboard">
+        <div class="dashboard-card" onclick="showScreen('log')">
+            <span>🍽</span>
+            <h3>Log Food</h3>
+        </div>
+        <div class="dashboard-card" onclick="showScreen('foods')">
+            <span>🥦</span>
+            <h3>Foods</h3>
+        </div>
+        <div class="dashboard-card" onclick="showScreen('history')">
+            <span>📜</span>
+            <h3>History</h3>
+        </div>
+        <div class="dashboard-card" onclick="showScreen('settings')">
+            <span>⚙️</span>
+            <h3>Settings</h3>
+        </div>
+    </div>
+    <div class="stats">
+        <div class="stat-card">Today's Intake: <strong id="stat-intake">0</strong> cal</div>
+        <div class="stat-card">Remaining: <strong id="stat-remaining">2500</strong> cal</div>
+        <div class="stat-card">Foods Logged: <strong id="stat-foods">0</strong></div>
+    </div>
+</section>
+
 
     <section id="log-screen" class="screen" style="display:none;">
         <h2>Log Food</h2>
         <label for="goal">Daily Calorie Goal:</label>
         <input id="goal" value="2500" readonly>
         <h3>Current Intake: <input id="daily-intake" value="0" readonly></h3>
+
+        <div class="progress-container">
+            <div id="calorie-progress" class="progress-bar"></div>
+        </div>
 
         <input id="food" placeholder="Enter food name" />
         <button id="submit">Submit</button>
@@ -54,9 +83,22 @@
 
     <section id="settings-screen" class="screen" style="display:none;">
         <h2>Settings</h2>
-        <label for="goal-change">Change Calorie Goal:</label>
-        <input id="goal-change" type="number">
-        <button onclick="changeGoal()">Update Goal</button>
+
+        <div class="setting-item">
+            <label for="goal-change">Change Calorie Goal:</label>
+            <input id="goal-change" type="number" placeholder="Enter new goal">
+            <button onclick="changeGoal()">Update Goal</button>
+        </div>
+
+        <hr>
+
+        <div class="setting-item">
+            <span>Dark Mode:</span>
+            <label class="switch">
+                <input type="checkbox" id="dark-mode-toggle">
+                <span class="slider round"></span>
+            </label>
+        </div>
     </section>
 
     <div id="toast" class="hidden"></div>
